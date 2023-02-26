@@ -146,10 +146,15 @@ import { Router } from '@angular/router';
 
       <!-- content -->
       <section class="flex flex-col space-y-6 p-4 pb-28 md:p-8">
-        <search
-          (search)="viewModel.searchQuery($event)"
-          (reset)="viewModel.resetSearch()"
-        ></search>
+        <div class="flex flex-row justify-center w-full">
+          <div class="w-full max-w-lg">
+            <search
+              (search)="viewModel.searchQuery($event)"
+              (reset)="viewModel.resetSearch()"
+            ></search>
+          </div>
+        </div>
+
         <ng-container *ngIf="contacts$ | async as contacts">
           <ng-container *ngIf="!contacts.length">
             <div

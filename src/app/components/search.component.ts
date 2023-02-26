@@ -6,7 +6,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
   selector: 'search',
   template: `
     <div
-      class="flex flex-row space-x-2 items-center h-12 px-4 rounded-full border border-gray-200 shadow overflow-hidden focus-within:ring-4 focus-within:border-black focus-within:ring-gray-200"
+      class="flex flex-row space-x-2 items-center h-12 w-full px-4 rounded-full border border-gray-200 shadow overflow-hidden focus-within:ring-4 focus-within:border-black focus-within:ring-gray-200"
     >
       <button
         title="Search"

@@ -5,7 +5,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
   selector: 'contact-card',
   template: `
     <div
-      class="flex flex-col space-y-4  p-2 rounded-lg border border-gray-200 shadow cursor-pointer hover:shadow-md"
+      class="flex flex-col space-y-4 h-full p-2 rounded-lg border border-gray-200 shadow cursor-pointer hover:shadow-md"
     >
       <div class="flex flex-row space-x-2 items-start justify-between">
         <div class="flex flex-row space-x-2">
