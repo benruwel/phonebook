@@ -1,38 +1,11 @@
-import { Contact, ContactListState } from './../domain/model';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { ContactListState } from './../domain/model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'contact-card',
+  selector: 'contact-row',
   template: `
-    <div
-      class="flex flex-col space-y-4  p-2 rounded-lg border border-gray-200 shadow cursor-pointer hover:shadow-md"
-    >
-      <div class="flex flex-row space-x-2 items-start justify-between">
-        <div class="flex flex-row space-x-2">
-          <div class="w-14 h-14 rounded-full bg-gray-100 overflow-hidden">
-            <img
-              [src]="
-                'https://ui-avatars.com/api/?background=random&name=' +
-                contact.firstName +
-                '+' +
-                contact.lastName
-              "
-              alt="Contact Avatar"
-              class="object-cover object-center"
-            />
-          </div>
-          <div class="flex flex-col space-y-1 py-2">
-            <span
-              (click)="viewDetails.emit(contact.id)"
-              class="font-medium text-gray-600 underline cursor-pointer hover:text-blue-500"
-              >{{ contact.firstName }} {{ contact.lastName }}</span
-            >
-            <span class="text-xs md:text-sm text-gray-500"
-              >Created On {{ contact.createdAt | date : 'longDate' }}</span
-            >
-          </div>
-        </div>
-
+    <div class="grid grid-cols-2 px-2 py-4 md:grid-cols-3 md:px-4 md:py-6">
+      <div class="flex flex-row items-center space-x-4">
         <input
           [id]="contact.id"
           [checked]="contact.selected"
@@ -40,9 +13,30 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
           class="rounded border-gray-400 text-black focus:ring-gray-400"
           type="checkbox"
           name="check"
+          id="check"
         />
+        <div class="w-10 h-10 rounded-full bg-gray-100 overflow-hidden">
+          <img
+            [src]="
+              'https://ui-avatars.com/api/?background=random&name=' +
+              contact.firstName +
+              '+' +
+              contact.lastName
+            "
+            alt="Contact Avatar"
+            class="object-cover object-center"
+          />
+        </div>
+        <p
+          (click)="viewDetails.emit(contact.id)"
+          class="underline cursor-pointer hover:text-blue-500"
+        >
+          {{ contact.firstName }} {{ contact.lastName }}
+        </p>
       </div>
-      <div class="flex flex-row flex-wrap space-x-2">
+      <div
+        class="flex flex-col space-y-1 md:flex-row md:space-x-2 md:flex-wrap md:space-y-0"
+      >
         <pill>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -74,17 +68,21 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
                 d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"
               />
             </svg>
-
             <span>{{ contact.email }}</span>
           </pill>
         </ng-container>
       </div>
+      <div
+        class="hidden flex-col space-y-1 text-sm text-gray-500 md:flex md:items-end"
+      >
+        <span>{{ contact.createdAt | date : 'longDate' }}</span>
+        <span>{{ contact.createdAt | date : 'shortTime' }}</span>
+      </div>
     </div>
   `,
 })
-export class ContactCardComponent {
+export class ContactRowComponent {
   @Input() contact!: ContactListState;
-
-  @Output() viewDetails = new EventEmitter<string>();
   @Output() markAsSelected = new EventEmitter<string>();
+  @Output() viewDetails = new EventEmitter<string>();
 }
